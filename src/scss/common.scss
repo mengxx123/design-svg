@@ -1,0 +1,263 @@
+@import "var";
+
+$borderColor: rgba(0,0,0,.12);
+
+.page-editor {
+    background-color: #ccc;
+}
+.editor-content-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include full;
+}
+.editor-box {
+    position: absolute;
+    left: 0;
+    top: 48px;
+    right: 320px;
+    bottom: 0;
+    //border: 1px solid #999;
+    user-select: none;
+    background-color: #eee;
+}
+.parent {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    //overflow: hidden;
+}
+.child {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    border: 1px solid #999;
+    cursor: move;
+    background-color: #fff;
+    text-align: center;
+    &.active {
+        //border: 1px solid #f00;
+    }
+    .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .input {
+        width: 100%;
+        height: 100%;
+        border: none;
+        outline: none;
+        padding: 16px;
+    }
+    .img-content {
+        display: block;
+        width: 100%;
+        height: 100%;
+        user-select: none;
+    }
+}
+.tool-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    height: 48px;
+    border-bottom: 1px solid $borderColor;
+    background-color: #fff;
+}
+.attr-box {
+    position: absolute;
+    top: 48px;
+    right: 0;
+    width: 320px;
+    bottom: 0;
+    padding: 16px;
+    overflow: auto;
+    border-left: 1px solid $borderColor;
+    background-color: #fff;
+    .input-x {
+        margin-right: 16px;
+        width: 80px;
+    }
+    .input-y {
+        width: 80px;
+    }
+    .input-small {
+        width: 80px;
+    }
+    .unit {
+        display: inline-block;
+        width: 24px;
+        text-align: center;
+    }
+    .mar-r {
+        margin-right: 16px;
+    }
+}
+.context-menu {
+    position: fixed;
+    width: 240px;
+    //overflow: hidden;
+    border: 1px solid #eee;
+    box-shadow: 0 1px 6px rgba(0,0,0,.117647), 0 1px 4px rgba(0,0,0,.117647);
+    background-color: #fff;
+    .mu-menu {
+        max-width: 100%;
+    }
+    .mu-menu-list {
+        max-width: 100%;
+    }
+    .mu-menu-item {
+        //max-width: 100%;
+    }
+}
+
+.handler-box {
+    @include full;
+    //position: absolute;
+    //left: 0;
+    //top: 0;
+    //right: 0;
+    //bottom: 0;
+
+    //background-color: rgba(0, 0, 0, .2);
+}
+.resize-box {
+    @include full;
+    z-index: 100000000000; // TODO
+    border: 1px dashed #09c;
+    background-color: rgba(255, 255, 255, .2);
+    .handler {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        border: 1px solid #09c;
+        background-color: #09c;
+        border-radius: 50%;
+    }
+    .center {
+        @include full;
+        cursor: move;
+    }
+    .handler-right {
+        right: -6px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: w-resize;
+    }
+    .handler-bottom {
+        left: 50%;
+        bottom: -6px;
+        transform: translateX(-50%);
+        cursor: n-resize;
+    }
+    .handler-left-top {
+        left: -6px;
+        top: -6px;
+        cursor: nw-resize;
+    }
+    .handler-right-top {
+        right: -6px;
+        top: -6px;
+        cursor: ne-resize;
+    }
+    .handler-right-bottom {
+        right: -6px;
+        bottom: -6px;
+        cursor: nw-resize;
+    }
+    .handler-left-bottom {
+        left: -6px;
+        bottom: -6px;
+        cursor: ne-resize;
+    }
+    .handler-top {
+        left: 50%;
+        top: -6px;
+        transform: translateX(-50%);
+        cursor: n-resize;
+    }
+    .handler-left {
+        left: -6px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: w-resize;
+    }
+    .handler-rotate{
+        left: 50%;
+        top: -24px;
+        transform: translateX(-50%);
+        cursor: crosshair;
+    }
+}
+
+// 辅助线
+.lines {
+    .line-horizontal {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        cursor: row-resize;
+        //background-color: #f00;
+        .line {
+            position: absolute;
+            left: 1px;
+            width: 100%;
+            height: 1px;
+            background-color: #333;
+        }
+    }
+    .line-vertical {
+        position: absolute;
+        left: 100px;
+        width: 5px;
+        height: 100%;
+        cursor: col-resize;
+        //background-color: #f00;
+        .line {
+            position: absolute;
+            left: 1px;
+            width: 1px;
+            height: 100%;
+            background-color: #333;
+        }
+    }
+}
+.selection {
+    position: absolute;
+    border: 2px solid #09c;
+}
+.doc-resize {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 16px;
+    height: 16px;
+    background-image: url("/static/img/resize.png");
+    cursor: nw-resize;
+}
+.doc-line {
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #666;
+}
+
+/**/
+.layer-box {
+    z-index: 1000;
+}
+.layer-list {
+    .item {
+
+    }
+}
